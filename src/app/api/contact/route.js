@@ -8,20 +8,17 @@ export async function POST(request) {
   try {
     const body = await request.json();
 
-    // Ensure messages directory exists
     const dir = path.dirname(messagesFile);
     if (!fs.existsSync(dir)) {
       fs.mkdirSync(dir, { recursive: true });
     }
 
-    // Read existing messages
     let messages = [];
     if (fs.existsSync(messagesFile)) {
       const data = fs.readFileSync(messagesFile, "utf8");
       messages = JSON.parse(data);
     }
 
-    // Add new message
     const newMessage = {
       id: Date.now().toString(),
       name: body.name,
@@ -34,8 +31,6 @@ export async function POST(request) {
     };
 
     messages.push(newMessage);
-
-    // Save to file
     fs.writeFileSync(messagesFile, JSON.stringify(messages, null, 2));
 
     return NextResponse.json({

@@ -4,9 +4,10 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Lock, User, ArrowLeft, Eye, EyeOff } from "lucide-react";
 import Link from "next/link";
+import { rateLimit } from "@/lib/rateLimit";
 
-const ADMIN_USERNAME = "admin";
-const ADMIN_PASSWORD = "admin123";
+const ADMIN_USERNAME = process.env.ADMIN_USERNAME || "admin";
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || "admin123";
 
 export default function AdminLogin() {
   const router = useRouter();
@@ -22,23 +23,32 @@ export default function AdminLogin() {
 
     if (loading) return;
 
+    // Rate limiting check
+    const identifier = `login_${username}`;
+    const { allowed, retryAfter } = rateLimit(identifier, 5, 15 * 60 * 1000);
+
+    if (!allowed) {
+      setError(
+        `Too many attempts. Please try again in ${Math.ceil(retryAfter / 60)} minutes.`,
+      );
+      return;
+    }
+
     setLoading(true);
     setError("");
 
-    // Small delay for better UX
     await new Promise((resolve) => setTimeout(resolve, 500));
 
     if (username === ADMIN_USERNAME && password === ADMIN_PASSWORD) {
-      // Clear any existing session first
       sessionStorage.clear();
-      // Set new session
       sessionStorage.setItem("adminAuth", "true");
       sessionStorage.setItem("adminEmail", username);
       sessionStorage.setItem("adminLoginTime", Date.now().toString());
-      // Redirect
       window.location.href = "/admin";
     } else {
-      setError("Invalid username or password!");
+      setError(
+        `Invalid username or password! ${allowed ? `${5 - (5 - (allowed.remaining || 5))} attempts remaining` : ""}`,
+      );
       setLoading(false);
     }
   };

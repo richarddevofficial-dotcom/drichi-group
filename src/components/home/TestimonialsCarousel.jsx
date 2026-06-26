@@ -2,19 +2,53 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Star, ChevronLeft, ChevronRight, Quote } from "lucide-react";
+import {
+  Star,
+  ChevronLeft,
+  ChevronRight,
+  Quote,
+  MessageSquare,
+} from "lucide-react";
+import Link from "next/link";
 import { testimonials } from "@/lib/data/testimonials";
 import SectionHeading from "@/components/shared/SectionHeading";
 
 export default function TestimonialsCarousel() {
   const [current, setCurrent] = useState(0);
 
+  // If no testimonials, show empty state
+  if (testimonials.length === 0) {
+    return (
+      <section className="section-padding bg-white">
+        <div className="mx-auto max-w-3xl lg:max-w-4xl px-4">
+          <SectionHeading
+            subtitle="Testimonials"
+            title="Trusted by Leaders"
+            description="Hear from the businesses and organizations we've helped transform."
+          />
+          <div className="text-center py-12 bg-brand-gray-50 rounded-2xl">
+            <MessageSquare
+              size={48}
+              className="mx-auto text-brand-gray-300 mb-4"
+            />
+            <h3 className="text-xl font-bold text-brand-gray-600 mb-2">
+              Testimonials Coming Soon
+            </h3>
+            <p className="text-brand-gray-400 max-w-md mx-auto">
+              Our clients love working with us. Their stories will be shared
+              here soon.
+            </p>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
   const next = () => setCurrent((prev) => (prev + 1) % testimonials.length);
   const prev = () =>
     setCurrent(
       (prev) => (prev - 1 + testimonials.length) % testimonials.length,
     );
-
   const testimonial = testimonials[current];
 
   return (
@@ -47,7 +81,7 @@ export default function TestimonialsCarousel() {
                   {testimonial.name.charAt(0)}
                 </div>
                 <div className="flex-1 min-w-0">
-                  <p className="font-bold text-brand-blue text-sm sm:text-base">
+                  <p className="font-bold text-brand-gray-600 text-sm sm:text-base">
                     {testimonial.name}
                   </p>
                   <p className="text-xs sm:text-sm text-brand-gray-400 truncate">

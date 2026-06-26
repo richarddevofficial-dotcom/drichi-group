@@ -17,8 +17,46 @@ export default function RootLayout({ children }) {
         <title>Drichi Group - Transforming Ideas into Digital Solutions</title>
         <meta
           name="description"
+          content="We Design, Develop, and Deliver Powerful Digital Solutions for Businesses, Schools, Pharmacies, Hospitals, and Organizations across Africa."
+        />
+        <meta
+          name="keywords"
+          content="software development, web development, pharmacy management system, school management system, e-commerce solutions, mobile app development, Uganda, Africa, Drichi Group"
+        />
+        <meta name="author" content="Drichi Group" />
+        <meta name="robots" content="index, follow" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        {/* Open Graph / Social Media */}
+        <meta
+          property="og:title"
+          content="Drichi Group - Transforming Ideas into Digital Solutions"
+        />
+        <meta
+          property="og:description"
           content="We Design, Develop, and Deliver Powerful Digital Solutions for Businesses, Schools, Pharmacies, Hospitals, and Organizations."
         />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://drichigroup.com" />
+        <meta property="og:site_name" content="Drichi Group" />
+
+        {/* Twitter Card */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta
+          name="twitter:title"
+          content="Drichi Group - Transforming Ideas into Digital Solutions"
+        />
+        <meta
+          name="twitter:description"
+          content="We Design, Develop, and Deliver Powerful Digital Solutions for Businesses, Schools, Pharmacies, Hospitals, and Organizations."
+        />
+
+        {/* Favicon */}
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="apple-touch-icon" href="/images/logo.svg" />
+
+        {/* Canonical URL */}
+        <link rel="canonical" href="https://drichigroup.com" />
       </head>
       <body
         className={

@@ -1,20 +1,28 @@
-import { ArrowRight, ExternalLink } from "lucide-react";
+import { ArrowRight, FolderOpen } from "lucide-react";
 import Link from "next/link";
 import { portfolioItems } from "@/lib/data/portfolio";
 import CTABanner from "@/components/home/CTABanner";
 
+export const metadata = {
+  title: "Portfolio - Drichi Group | Our Work & Projects",
+  description:
+    "Explore our portfolio of successful projects including pharmacy systems, school portals, e-commerce stores, hospital management, and NGO websites.",
+  keywords:
+    "portfolio, projects, pharmacy system, school portal, e-commerce store, hospital management, NGO website, software projects Uganda",
+};
+
 export default function PortfolioPage() {
   return (
     <>
-      <section className="bg-navy pt-32 pb-20">
+      <section className="bg-brand-blue pt-32 pb-20">
         <div className="mx-auto max-w-7xl px-4 text-center lg:px-8">
-          <span className="text-sm font-semibold uppercase tracking-wider text-orange">
+          <span className="text-sm font-semibold uppercase tracking-wider text-brand-orange">
             Our Work
           </span>
           <h1 className="mt-4 text-4xl font-extrabold text-white md:text-5xl">
             Our Work Speaks Volumes
           </h1>
-          <p className="mx-auto mt-6 max-w-3xl text-lg leading-relaxed text-gray-400">
+          <p className="mx-auto mt-6 max-w-3xl text-lg leading-relaxed text-brand-gray-400">
             We don't just deliver projects; we forge success stories. Explore a
             selection of our recent work.
           </p>
@@ -23,50 +31,73 @@ export default function PortfolioPage() {
 
       <section className="section-padding bg-white">
         <div className="mx-auto max-w-7xl">
-          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-            {portfolioItems.map((item) => (
-              <Link
-                key={item.id}
-                href={`/portfolio/${item.slug}`}
-                className="group overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm hover:shadow-lg transition-all"
-              >
-                <div className="aspect-video bg-gray-100 flex items-center justify-center">
-                  <ExternalLink
-                    size={48}
-                    className="text-gray-400 group-hover:text-blue transition-colors"
-                  />
-                </div>
-                <div className="p-6">
-                  <span className="text-xs font-semibold text-orange uppercase tracking-wider">
-                    {item.category}
-                  </span>
-                  <h3 className="mt-2 text-lg font-bold text-navy group-hover:text-blue transition-colors">
-                    {item.title}
-                  </h3>
-                  <p className="mt-2 text-sm leading-relaxed text-gray-600 line-clamp-2">
-                    {item.description}
-                  </p>
-                  <div className="mt-4 flex flex-wrap gap-2">
-                    {item.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="rounded-md bg-gray-100 px-2 py-1 text-xs font-medium text-gray-600"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                  <div className="mt-4 flex items-center gap-2 text-sm font-semibold text-blue">
-                    View Project
-                    <ArrowRight
-                      size={16}
-                      className="group-hover:translate-x-1 transition-transform"
+          {portfolioItems.length > 0 ? (
+            <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+              {portfolioItems.map((item) => (
+                <Link
+                  key={item.id}
+                  href={`/portfolio/${item.slug}`}
+                  className="group overflow-hidden rounded-2xl border border-brand-gray-200 bg-white shadow-sm hover:shadow-lg transition-all"
+                >
+                  <div className="aspect-video bg-brand-gray-100 flex items-center justify-center">
+                    <FolderOpen
+                      size={48}
+                      className="text-brand-gray-400 group-hover:text-brand-orange transition-colors"
                     />
                   </div>
-                </div>
+                  <div className="p-6">
+                    <span className="text-xs font-semibold text-brand-orange uppercase tracking-wider">
+                      {item.category}
+                    </span>
+                    <h3 className="mt-2 text-lg font-bold text-brand-gray-600 group-hover:text-brand-orange transition-colors">
+                      {item.title}
+                    </h3>
+                    <p className="mt-2 text-sm leading-relaxed text-brand-gray-500 line-clamp-2">
+                      {item.description}
+                    </p>
+                    <div className="mt-4 flex flex-wrap gap-2">
+                      {item.tags.map((tag) => (
+                        <span
+                          key={tag}
+                          className="rounded-md bg-brand-gray-100 px-2 py-1 text-xs font-medium text-brand-gray-500"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                    <div className="mt-4 flex items-center gap-2 text-sm font-semibold text-brand-orange">
+                      View Project
+                      <ArrowRight
+                        size={16}
+                        className="group-hover:translate-x-1 transition-transform"
+                      />
+                    </div>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          ) : (
+            <div className="text-center py-16">
+              <FolderOpen
+                size={64}
+                className="mx-auto text-brand-gray-300 mb-6"
+              />
+              <h3 className="text-2xl font-bold text-brand-gray-600 mb-3">
+                Portfolio Coming Soon
+              </h3>
+              <p className="text-brand-gray-400 max-w-md mx-auto mb-8">
+                We're working on showcasing our amazing projects. Check back
+                soon or contact us to see our work.
+              </p>
+              <Link
+                href="/contact"
+                className="inline-flex items-center gap-2 rounded-lg bg-brand-orange px-6 py-3 font-semibold text-white hover:bg-brand-orange-600 transition-all"
+              >
+                Contact Us
+                <ArrowRight size={18} />
               </Link>
-            ))}
-          </div>
+            </div>
+          )}
         </div>
       </section>
 
