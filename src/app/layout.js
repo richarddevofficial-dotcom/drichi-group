@@ -52,8 +52,8 @@ export default function RootLayout({ children }) {
         />
 
         {/* Favicon */}
-        <link rel="icon" href="/favicon.ico" sizes="any" />
-        <link rel="apple-touch-icon" href="/images/logo.svg" />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <link rel="apple-touch-icon" href="/favicon.svg" />
 
         {/* Canonical URL */}
         <link rel="canonical" href="https://drichigroup.com" />
