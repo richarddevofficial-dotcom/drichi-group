@@ -1,9 +1,9 @@
 export const products = [
   {
-    id: "pharmacy-pro",
-    name: "Pharmacy Pro",
+    id: "pharmplus",
+    name: "PharmPlus",
     description:
-      "Complete pharmacy operations suite with intelligent inventory management and proactive expiry tracking.",
+      "Complete pharmacy management system built for South Sudanese pharmacies with intelligent inventory tracking and expiry alerts.",
     features: [
       "Inventory & Expiry Tracking",
       "Sales & Point of Sale",
@@ -11,15 +11,15 @@ export const products = [
       "Reports & Analytics Dashboard",
       "Multi-store Support",
     ],
-    benefit: "Cut losses with proactive expiry tracking",
+    benefit: "Cut medicine losses with proactive expiry tracking",
     category: "Healthcare",
     image: "/images/portfolio/pharmacy-dashboard.jpg",
   },
   {
     id: "school-sphere",
-    name: "School Sphere",
+    name: "EduSphere",
     description:
-      "Centralized student and academic lifecycle management platform for modern educational institutions.",
+      "School management platform designed for South Sudanese schools to manage students, exams, fees, and parent communication.",
     features: [
       "Student Records Management",
       "Attendance & Timetable",
@@ -33,14 +33,14 @@ export const products = [
   },
   {
     id: "commerce-kit",
-    name: "Commerce Kit",
+    name: "NileCart",
     description:
-      "Fully-featured online store platform with integrated payments and order management.",
+      "E-commerce platform enabling South Sudanese businesses to sell online with mobile money integration and delivery tracking.",
     features: [
       "Online Store Setup",
       "Product Management",
       "Shopping Cart & Checkout",
-      "Payment Gateway Integration",
+      "Mobile Money Integration",
       "Order Tracking System",
     ],
     benefit: "Launch your online store in days, not months",
@@ -49,9 +49,9 @@ export const products = [
   },
   {
     id: "rent-tracker",
-    name: "Rent Tracker",
+    name: "PayBoma",
     description:
-      "End-to-end property and tenant management system with automated rent collection.",
+      "Property management system for South Sudanese landlords to manage tenants, collect rent, and track properties effortlessly.",
     features: [
       "Tenant & Lease Management",
       "Automated Rent Collection",
@@ -65,9 +65,9 @@ export const products = [
   },
   {
     id: "stock-master",
-    name: "Stock Master",
+    name: "StockPro",
     description:
-      "Smart inventory control system with multi-warehouse support and real-time reporting.",
+      "Inventory control system for South Sudanese businesses with multi-warehouse support and real-time stock valuation.",
     features: [
       "Multi-warehouse Management",
       "Stock Level Tracking",
@@ -75,15 +75,15 @@ export const products = [
       "Barcode Scanning Support",
       "Real-time Inventory Valuation",
     ],
-    benefit: "Get a real-time valuation of your entire stock in one click",
+    benefit: "Know your stock value in real-time with one click",
     category: "Inventory",
     image: "/images/portfolio/pharmacy-dashboard.jpg",
   },
   {
     id: "medicore-hm",
-    name: "MediCore HM",
+    name: "MediCore",
     description:
-      "Integrated hospital management system covering patients, billing, pharmacy, and laboratory.",
+      "Hospital management system for clinics and hospitals in South Sudan covering patients, billing, pharmacy, and laboratory.",
     features: [
       "Patient Records & History",
       "Appointment Scheduling",
