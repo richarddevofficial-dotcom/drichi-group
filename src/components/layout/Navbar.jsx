@@ -65,15 +65,15 @@ export default function Navbar() {
         </button>
       </nav>
 
-      {/* Mobile Menu Overlay - Always dark background */}
+      {/* Mobile Menu Overlay */}
       {isMobileMenuOpen && (
-        <div className="fixed inset-0 top-[56px] z-40 bg-brand-blue/98 backdrop-blur-md lg:hidden">
-          <div className="flex flex-col space-y-1 px-4 pt-4 pb-6">
+        <div className="fixed inset-0 top-[56px] z-40 bg-[#0F172A] lg:hidden">
+          <div className="flex flex-col space-y-1 px-4 pt-6 pb-6">
             {NAV_LINKS.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
-                className="block rounded-lg px-4 py-3 text-base text-white transition-colors hover:bg-white/10 hover:text-brand-orange"
+                className="block rounded-lg px-4 py-4 text-base text-white font-medium transition-colors hover:bg-white/10 hover:text-brand-orange"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 {link.label}
@@ -81,7 +81,7 @@ export default function Navbar() {
             ))}
             <Link
               href="/contact"
-              className="mt-4 block rounded-lg bg-brand-orange px-4 py-3 text-center text-base font-semibold text-white hover:bg-brand-orange-600"
+              className="mt-6 block rounded-lg bg-brand-orange px-4 py-4 text-center text-base font-semibold text-white hover:bg-brand-orange-600"
               onClick={() => setIsMobileMenuOpen(false)}
             >
               Contact Us
