@@ -5,6 +5,12 @@ import { useRouter } from "next/navigation";
 import { Lock, User, ArrowLeft, Eye, EyeOff } from "lucide-react";
 import Link from "next/link";
 
+// Hardcoded credentials - change these as needed
+const VALID_USERS = {
+  richard: "smart@123",
+  admin: "admin123",
+};
+
 export default function AdminLogin() {
   const router = useRouter();
   const [username, setUsername] = useState("");
@@ -24,16 +30,8 @@ export default function AdminLogin() {
 
     await new Promise((resolve) => setTimeout(resolve, 500));
 
-    // Check credentials - try env vars first, then fallback
-    const validUsername = process.env.NEXT_PUBLIC_ADMIN_USERNAME || "admin";
-    const validPassword = process.env.NEXT_PUBLIC_ADMIN_PASSWORD || "admin123";
-
-    // Also accept direct admin/admin123 always
-    const isValid =
-      (username === validUsername && password === validPassword) ||
-      (username === "admin" && password === "admin123");
-
-    if (isValid) {
+    // Check credentials
+    if (VALID_USERS[username] === password) {
       sessionStorage.clear();
       sessionStorage.setItem("adminAuth", "true");
       sessionStorage.setItem("adminEmail", username);

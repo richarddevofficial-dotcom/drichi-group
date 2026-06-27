@@ -23,7 +23,7 @@ export default function Navbar() {
       className={`fixed top-0 z-50 w-full transition-all duration-300 ${
         isScrolled
           ? "bg-brand-blue/95 backdrop-blur-md shadow-lg py-2"
-          : "bg-transparent py-4"
+          : "bg-white/80 backdrop-blur-md py-4"
       }`}
     >
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-4 lg:px-8">
@@ -36,7 +36,9 @@ export default function Navbar() {
             <Link
               key={link.href}
               href={link.href}
-              className="text-sm font-medium text-gray-300 transition-colors hover:text-brand-orange whitespace-nowrap"
+              className={`text-sm font-medium transition-colors hover:text-brand-orange whitespace-nowrap ${
+                isScrolled ? "text-gray-300" : "text-brand-gray-600"
+              }`}
             >
               {link.label}
             </Link>
@@ -52,7 +54,7 @@ export default function Navbar() {
         {/* Mobile Menu Button */}
         <button
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          className="text-white lg:hidden p-2"
+          className={`lg:hidden p-2 ${isScrolled ? "text-white" : "text-brand-gray-600"}`}
           aria-label="Toggle menu"
         >
           {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}

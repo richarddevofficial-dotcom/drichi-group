@@ -6,10 +6,10 @@ import Link from "next/link";
 import { SITE_CONFIG } from "@/lib/constants";
 
 export default function HeroSection() {
-  const stats = [
-    { value: "50+", label: "Projects Delivered" },
-    { value: "30+", label: "Happy Clients" },
-    { value: "5+", label: "Years Experience" },
+  const highlights = [
+    { value: "4", label: "Services Offered" },
+    { value: "2", label: "Ready Products" },
+    { value: "24/7", label: "Support" },
   ];
 
   return (
@@ -60,15 +60,15 @@ export default function HeroSection() {
               </Link>
             </div>
 
-            {/* Stats */}
+            {/* Highlights */}
             <div className="mt-8 sm:mt-12 flex gap-4 sm:gap-8 border-t border-brand-gray-200 pt-6 sm:pt-8">
-              {stats.map((stat) => (
-                <div key={stat.label}>
+              {highlights.map((item) => (
+                <div key={item.label}>
                   <div className="text-xl sm:text-2xl font-bold text-brand-gray-600">
-                    {stat.value}
+                    {item.value}
                   </div>
                   <div className="text-xs sm:text-sm text-brand-gray-400">
-                    {stat.label}
+                    {item.label}
                   </div>
                 </div>
               ))}
