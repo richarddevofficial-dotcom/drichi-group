@@ -67,7 +67,7 @@ export default function Navbar() {
 
       {/* Mobile Menu Overlay */}
       {isMobileMenuOpen && (
-        <div className="fixed inset-0 top-[56px] z-40 bg-[#0F172A] lg:hidden">
+        <div className="fixed inset-0 top-[56px] z-40 bg-brand-orange lg:hidden">
           <div className="flex flex-col space-y-1 px-4 pt-6 pb-6">
             {NAV_LINKS.map((link) => (
               <Link
