@@ -2,22 +2,26 @@ import { NextResponse } from "next/server";
 import fs from "fs";
 import path from "path";
 
-const messagesFile = path.join(process.cwd(), "src/lib/data/messages.json");
-
-function ensureFile() {
-  const dir = path.dirname(messagesFile);
-  if (!fs.existsSync(dir)) {
-    fs.mkdirSync(dir, { recursive: true });
-  }
-  if (!fs.existsSync(messagesFile)) {
-    fs.writeFileSync(messagesFile, JSON.stringify([], null, 2));
-  }
-}
+const messagesFile = path.join("/tmp", "messages.json");
 
 function readMessages() {
-  ensureFile();
-  const data = fs.readFileSync(messagesFile, "utf8");
-  return JSON.parse(data);
+  try {
+    if (fs.existsSync(messagesFile)) {
+      const data = fs.readFileSync(messagesFile, "utf8");
+      return JSON.parse(data);
+    }
+  } catch (error) {
+    console.error("Error reading messages:", error);
+  }
+  return [];
+}
+
+function writeMessages(messages) {
+  try {
+    fs.writeFileSync(messagesFile, JSON.stringify(messages, null, 2));
+  } catch (error) {
+    console.error("Error writing messages:", error);
+  }
 }
 
 export async function GET() {

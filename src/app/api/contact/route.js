@@ -2,21 +2,20 @@ import { NextResponse } from "next/server";
 import fs from "fs";
 import path from "path";
 
-const messagesFile = path.join(process.cwd(), "src/lib/data/messages.json");
+const messagesFile = path.join("/tmp", "messages.json");
 
 export async function POST(request) {
   try {
     const body = await request.json();
 
-    const dir = path.dirname(messagesFile);
-    if (!fs.existsSync(dir)) {
-      fs.mkdirSync(dir, { recursive: true });
-    }
-
     let messages = [];
-    if (fs.existsSync(messagesFile)) {
-      const data = fs.readFileSync(messagesFile, "utf8");
-      messages = JSON.parse(data);
+    try {
+      if (fs.existsSync(messagesFile)) {
+        const data = fs.readFileSync(messagesFile, "utf8");
+        messages = JSON.parse(data);
+      }
+    } catch (error) {
+      // File doesn't exist yet
     }
 
     const newMessage = {
@@ -35,12 +34,11 @@ export async function POST(request) {
 
     return NextResponse.json({
       success: true,
-      message:
-        "Thank you! Your message has been sent. We'll get back to you within 24 hours.",
+      message: "Thank you! Your message has been sent.",
     });
   } catch (error) {
     return NextResponse.json(
-      { success: false, message: "Failed to send message. Please try again." },
+      { success: false, message: "Failed to send message." },
       { status: 500 },
     );
   }

@@ -2,28 +2,27 @@ import { NextResponse } from "next/server";
 import fs from "fs";
 import path from "path";
 
-// Use a data file instead of code file
-const dataFilePath = path.join(process.cwd(), "data", "portfolio.json");
-
-function ensureDataFile() {
-  const dir = path.dirname(dataFilePath);
-  if (!fs.existsSync(dir)) {
-    fs.mkdirSync(dir, { recursive: true });
-  }
-  if (!fs.existsSync(dataFilePath)) {
-    fs.writeFileSync(dataFilePath, JSON.stringify([], null, 2));
-  }
-}
+// Use /tmp for Vercel compatibility
+const dataFilePath = path.join("/tmp", "portfolio.json");
 
 function readPortfolioData() {
-  ensureDataFile();
-  const data = fs.readFileSync(dataFilePath, "utf8");
-  return JSON.parse(data);
+  try {
+    if (fs.existsSync(dataFilePath)) {
+      const data = fs.readFileSync(dataFilePath, "utf8");
+      return JSON.parse(data);
+    }
+  } catch (error) {
+    console.error("Error reading:", error);
+  }
+  return [];
 }
 
 function writePortfolioData(items) {
-  ensureDataFile();
-  fs.writeFileSync(dataFilePath, JSON.stringify(items, null, 2));
+  try {
+    fs.writeFileSync(dataFilePath, JSON.stringify(items, null, 2));
+  } catch (error) {
+    console.error("Error writing:", error);
+  }
 }
 
 // GET - Fetch all portfolio items

@@ -8,13 +8,13 @@ import {
   TrendingUp,
   Users,
   Plus,
-  Edit,
-  Trash2,
   Eye,
+  Trash2,
 } from "lucide-react";
 
 export default function AdminDashboard() {
   const [portfolioCount, setPortfolioCount] = useState(0);
+  const [messageCount, setMessageCount] = useState(0);
   const [recentPortfolio, setRecentPortfolio] = useState([]);
 
   useEffect(() => {
@@ -23,11 +23,19 @@ export default function AdminDashboard() {
 
   const loadData = async () => {
     try {
-      const res = await fetch("/api/portfolio");
-      const data = await res.json();
-      if (data.success) {
-        setPortfolioCount(data.data.length);
-        setRecentPortfolio(data.data.slice(-4).reverse());
+      // Load portfolio
+      const portfolioRes = await fetch("/api/portfolio");
+      const portfolioData = await portfolioRes.json();
+      if (portfolioData.success) {
+        setPortfolioCount(portfolioData.data.length);
+        setRecentPortfolio(portfolioData.data.slice(-4).reverse());
+      }
+
+      // Load messages
+      const messagesRes = await fetch("/api/messages");
+      const messagesData = await messagesRes.json();
+      if (messagesData.success) {
+        setMessageCount(messagesData.data.length);
       }
     } catch (error) {
       console.error("Failed to load data:", error);
@@ -45,7 +53,7 @@ export default function AdminDashboard() {
     },
     {
       label: "Messages",
-      value: "0",
+      value: messageCount,
       icon: MessageSquare,
       href: "/admin/messages",
       color: "bg-blue-500",
@@ -53,14 +61,14 @@ export default function AdminDashboard() {
     },
     {
       label: "Projects Done",
-      value: "50+",
+      value: portfolioCount,
       icon: TrendingUp,
       color: "bg-green-500",
       textColor: "text-green-500",
     },
     {
       label: "Happy Clients",
-      value: "30+",
+      value: portfolioCount,
       icon: Users,
       color: "bg-purple-500",
       textColor: "text-purple-500",
@@ -107,7 +115,7 @@ export default function AdminDashboard() {
         })}
       </div>
 
-      {/* Recent Portfolio Items */}
+      {/* Recent Portfolio */}
       <div className="bg-white rounded-xl shadow-sm border border-brand-gray-100">
         <div className="flex items-center justify-between p-6 border-b border-brand-gray-100">
           <h2 className="text-lg font-bold text-brand-gray-600">
@@ -143,7 +151,7 @@ export default function AdminDashboard() {
                     </div>
                   </div>
                   <Link
-                    href={`/admin/portfolio`}
+                    href="/admin/portfolio"
                     className="text-sm text-brand-orange hover:text-brand-orange-600"
                   >
                     <Eye size={18} />
