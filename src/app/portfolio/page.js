@@ -1,17 +1,29 @@
 import { ArrowRight, FolderOpen } from "lucide-react";
 import Link from "next/link";
-import { portfolioItems } from "@/lib/data/portfolio";
 import CTABanner from "@/components/home/CTABanner";
+
+export const dynamic = "force-dynamic";
 
 export const metadata = {
   title: "Portfolio - Drichi Group | Our Work & Projects",
-  description:
-    "Explore our portfolio of successful projects including pharmacy systems, school portals, e-commerce stores, hospital management, and NGO websites.",
-  keywords:
-    "portfolio, projects, pharmacy system, school portal, e-commerce store, hospital management, NGO website, software projects Uganda",
+  description: "Explore our portfolio of successful projects.",
+  keywords: "portfolio, projects, software, South Sudan",
 };
 
-export default function PortfolioPage() {
+async function getPortfolio() {
+  try {
+    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+    const res = await fetch(`${baseUrl}/api/portfolio`, { cache: "no-store" });
+    const data = await res.json();
+    return data.success ? data.data : [];
+  } catch (error) {
+    return [];
+  }
+}
+
+export default async function PortfolioPage() {
+  const portfolioItems = await getPortfolio();
+
   return (
     <>
       <section className="bg-brand-blue pt-32 pb-20">
@@ -23,8 +35,8 @@ export default function PortfolioPage() {
             Our Work Speaks Volumes
           </h1>
           <p className="mx-auto mt-6 max-w-3xl text-lg leading-relaxed text-brand-gray-400">
-            We don't just deliver projects; we forge success stories. Explore a
-            selection of our recent work.
+            We don't just deliver projects; we forge success stories. Explore
+            our recent work.
           </p>
         </div>
       </section>
@@ -56,7 +68,7 @@ export default function PortfolioPage() {
                       {item.description}
                     </p>
                     <div className="mt-4 flex flex-wrap gap-2">
-                      {item.tags.map((tag) => (
+                      {item.tags?.map((tag) => (
                         <span
                           key={tag}
                           className="rounded-md bg-brand-gray-100 px-2 py-1 text-xs font-medium text-brand-gray-500"
@@ -87,7 +99,7 @@ export default function PortfolioPage() {
               </h3>
               <p className="text-brand-gray-400 max-w-md mx-auto mb-8">
                 We're working on showcasing our amazing projects. Check back
-                soon or contact us to see our work.
+                soon!
               </p>
               <Link
                 href="/contact"

@@ -2,34 +2,28 @@ import { NextResponse } from "next/server";
 import fs from "fs";
 import path from "path";
 
-const dataFilePath = path.join(process.cwd(), "src/lib/data/portfolio.js");
+// Use a data file instead of code file
+const dataFilePath = path.join(process.cwd(), "data", "portfolio.json");
 
-// Simple API key check
-function isAuthenticated(request) {
-  const apiKey = request.headers.get("x-api-key");
-  return apiKey === (process.env.ADMIN_PASSWORD || "admin123");
-}
-
-// Helper to read current portfolio data
-function readPortfolioData() {
-  try {
-    const fileContent = fs.readFileSync(dataFilePath, "utf8");
-    const match = fileContent.match(
-      /export const portfolioItems = (\[[\s\S]*?\]);/,
-    );
-    if (match) {
-      return eval(match[1]);
-    }
-  } catch (error) {
-    console.error("Error reading portfolio:", error);
+function ensureDataFile() {
+  const dir = path.dirname(dataFilePath);
+  if (!fs.existsSync(dir)) {
+    fs.mkdirSync(dir, { recursive: true });
   }
-  return [];
+  if (!fs.existsSync(dataFilePath)) {
+    fs.writeFileSync(dataFilePath, JSON.stringify([], null, 2));
+  }
 }
 
-// Helper to write portfolio data back to file
+function readPortfolioData() {
+  ensureDataFile();
+  const data = fs.readFileSync(dataFilePath, "utf8");
+  return JSON.parse(data);
+}
+
 function writePortfolioData(items) {
-  const fileContent = `export const portfolioItems = ${JSON.stringify(items, null, 2)};`;
-  fs.writeFileSync(dataFilePath, fileContent, "utf8");
+  ensureDataFile();
+  fs.writeFileSync(dataFilePath, JSON.stringify(items, null, 2));
 }
 
 // GET - Fetch all portfolio items
@@ -47,13 +41,6 @@ export async function GET() {
 
 // POST - Add new portfolio item
 export async function POST(request) {
-  if (!isAuthenticated(request)) {
-    return NextResponse.json(
-      { success: false, error: "Unauthorized" },
-      { status: 401 },
-    );
-  }
-
   try {
     const body = await request.json();
     const items = readPortfolioData();
@@ -87,13 +74,6 @@ export async function POST(request) {
 
 // PUT - Update portfolio item
 export async function PUT(request) {
-  if (!isAuthenticated(request)) {
-    return NextResponse.json(
-      { success: false, error: "Unauthorized" },
-      { status: 401 },
-    );
-  }
-
   try {
     const body = await request.json();
     const { id, ...updates } = body;
@@ -121,28 +101,14 @@ export async function PUT(request) {
 
 // DELETE - Remove portfolio item
 export async function DELETE(request) {
-  if (!isAuthenticated(request)) {
-    return NextResponse.json(
-      { success: false, error: "Unauthorized" },
-      { status: 401 },
-    );
-  }
-
   try {
     const { searchParams } = new URL(request.url);
     const id = searchParams.get("id");
     const items = readPortfolioData();
 
     const filteredItems = items.filter((item) => item.id !== id);
-
-    if (filteredItems.length === items.length) {
-      return NextResponse.json(
-        { success: false, error: "Item not found" },
-        { status: 404 },
-      );
-    }
-
     writePortfolioData(filteredItems);
+
     return NextResponse.json({ success: true, message: "Item deleted" });
   } catch (error) {
     return NextResponse.json(

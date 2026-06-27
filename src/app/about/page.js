@@ -69,18 +69,21 @@ export default function AboutPage() {
                 Our Story
               </h2>
               <p className="mt-4 leading-relaxed text-brand-gray-500">
-                Drichi Group began with a simple yet powerful vision: to make
-                sophisticated technology accessible to businesses of every size
-                across Africa. We saw pharmacies struggling with manual
-                inventory, schools drowning in paperwork, and businesses unable
-                to reach customers online.
+                Drichi Group was born in Juba, South Sudan with a simple yet
+                powerful vision: to bring world-class technology solutions to
+                the world's youngest nation. We saw local pharmacies struggling
+                with manual inventory tracking, schools drowning in paperwork,
+                businesses unable to reach customers online, and organizations
+                held back by outdated systems.
               </p>
               <p className="mt-4 leading-relaxed text-brand-gray-500">
-                Today, we're proud to have delivered 50+ projects that transform
-                how our clients operate. From a pharmacy needing precise
-                inventory control to a school managing thousands of students, we
-                translate complex operational challenges into elegant,
-                easy-to-use software.
+                Today, we're proud to be part of South Sudan's digital
+                transformation, delivering innovative software solutions that
+                help local businesses and organizations operate more
+                efficiently. From a pharmacy in Juba needing precise inventory
+                control to a school managing hundreds of students, we translate
+                complex operational challenges into simple, powerful software
+                built for South Sudan's unique needs.
               </p>
             </div>
             <div className="space-y-8">
@@ -93,10 +96,10 @@ export default function AboutPage() {
                   </h3>
                 </div>
                 <p className="mt-3 leading-relaxed text-brand-gray-500">
-                  To democratize digital power by providing affordable, secure,
-                  and scalable solutions that streamline operations, boost
-                  efficiency, and unlock new growth for businesses of every
-                  size.
+                  To empower South Sudanese businesses and organizations with
+                  affordable, secure, and scalable digital solutions that
+                  streamline operations, boost efficiency, and drive growth in
+                  our local economy.
                 </p>
               </div>
 
@@ -109,10 +112,9 @@ export default function AboutPage() {
                   </h3>
                 </div>
                 <p className="mt-3 leading-relaxed text-brand-gray-500">
-                  To be the leading technology solutions provider in Africa,
-                  recognized for transforming how organizations operate and
-                  setting a new standard for software excellence and
-                  partnership.
+                  To be South Sudan's leading technology solutions provider,
+                  powering the nation's digital future and setting the standard
+                  for software excellence and innovation across East Africa.
                 </p>
               </div>
             </div>

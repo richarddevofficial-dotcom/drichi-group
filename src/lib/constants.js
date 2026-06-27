@@ -2,7 +2,7 @@ export const SITE_CONFIG = {
   name: "Drichi Group",
   tagline: "Transforming Ideas into Digital Solutions",
   description:
-    "We Design, Develop, and Deliver Powerful Digital Solutions for Businesses, Schools, Pharmacies, Hospitals, and Organizations.",
+    "We Design, Develop, and Deliver Powerful Digital Solutions for Businesses, Schools, Pharmacies, Hospitals, and Organizations in South Sudan.",
   email: "info@drichigroup.com",
   phone: "+211 928 661 250",
   whatsapp: "https://wa.me/211928661250",

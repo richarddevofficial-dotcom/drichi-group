@@ -110,15 +110,15 @@ export const services = [
   },
   {
     icon: "Wrench",
-    title: "IT Consultancy & Support",
+    title: "I.T Consultancy",
     slug: "it-consultancy-support",
     description:
-      "Expert guidance for your technology decisions with hands-on support for QA testing, API integration, and DevOps.",
+      "Empowering South Sudanese organizations with expert IT guidance, from infrastructure planning to digital transformation and staff training.",
     features: [
-      "System Analysis & Architecture",
-      "QA & Automated Testing",
-      "API Development & Integration",
-      "DevOps & Cloud Support",
+      "IT Infrastructure Assessment",
+      "Digital Transformation Strategy",
+      "Network Setup & Security",
+      "IT Training & Capacity Building",
     ],
     iconComponent: Wrench,
   },
