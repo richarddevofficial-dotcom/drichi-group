@@ -12,8 +12,9 @@ export const metadata = {
 
 async function getPortfolio() {
   try {
-    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
-    const res = await fetch(`${baseUrl}/api/portfolio`, { cache: "no-store" });
+    const res = await fetch("https://drichigroup.com/api/portfolio", {
+      cache: "no-store",
+    });
     const data = await res.json();
     return data.success ? data.data : [];
   } catch (error) {
@@ -35,8 +36,7 @@ export default async function PortfolioPage() {
             Our Work Speaks Volumes
           </h1>
           <p className="mx-auto mt-6 max-w-3xl text-lg leading-relaxed text-brand-gray-400">
-            We don't just deliver projects; we forge success stories. Explore
-            our recent work.
+            We don't just deliver projects; we forge success stories.
           </p>
         </div>
       </section>
@@ -46,9 +46,8 @@ export default async function PortfolioPage() {
           {portfolioItems.length > 0 ? (
             <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
               {portfolioItems.map((item) => (
-                <Link
+                <div
                   key={item.id}
-                  href={`/portfolio/${item.slug}`}
                   className="group overflow-hidden rounded-2xl border border-brand-gray-200 bg-white shadow-sm hover:shadow-lg transition-all"
                 >
                   <div className="aspect-video bg-brand-gray-100 flex items-center justify-center">
@@ -61,7 +60,7 @@ export default async function PortfolioPage() {
                     <span className="text-xs font-semibold text-brand-orange uppercase tracking-wider">
                       {item.category}
                     </span>
-                    <h3 className="mt-2 text-lg font-bold text-brand-gray-600 group-hover:text-brand-orange transition-colors">
+                    <h3 className="mt-2 text-lg font-bold text-brand-gray-600">
                       {item.title}
                     </h3>
                     <p className="mt-2 text-sm leading-relaxed text-brand-gray-500 line-clamp-2">
@@ -77,15 +76,19 @@ export default async function PortfolioPage() {
                         </span>
                       ))}
                     </div>
-                    <div className="mt-4 flex items-center gap-2 text-sm font-semibold text-brand-orange">
-                      View Project
-                      <ArrowRight
-                        size={16}
-                        className="group-hover:translate-x-1 transition-transform"
-                      />
-                    </div>
+                    {item.url && item.url !== "#" && (
+                      <a
+                        href={item.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-brand-orange hover:text-brand-orange-600"
+                      >
+                        View Project
+                        <ArrowRight size={16} />
+                      </a>
+                    )}
                   </div>
-                </Link>
+                </div>
               ))}
             </div>
           ) : (
@@ -98,8 +101,7 @@ export default async function PortfolioPage() {
                 Portfolio Coming Soon
               </h3>
               <p className="text-brand-gray-400 max-w-md mx-auto mb-8">
-                We're working on showcasing our amazing projects. Check back
-                soon!
+                We're working on showcasing our amazing projects.
               </p>
               <Link
                 href="/contact"
